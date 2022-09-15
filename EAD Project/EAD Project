@@ -1,0 +1,40 @@
+Caso prático 
+Desenvolver um software no paradigma de programação orientada a objetos para atender a declaração de visão de produto e os requisitos conforme seguem:  
+ 
+Visão de produto: 
+
+Para escolas de qualquer tipo de curso fornecido na modalidade à distância com exigência de controle de frequência para emissão do certificado de conclusão, este caso prático é o software que facilita o gerenciamento de turmas por disciplinas ofertadas e o controle, para professores e alunos, das faltas acumuladas.   
+
+Requisitos
+
+1.     O sistema deve permitir a criação de instituições, cursos e disciplinas,
+2.     O sistema deve permitir o cadastramento de professores e alunos,
+3.     O sistema deve permitir a criação de turmas das disciplinas dos cursos existentes,
+4.     O sistema deve permitir o apontamento de presença pelo professor,
+5.     O sistema deve ter uma tela de consulta das faltas por disciplina com acesso para professores e alunos.     
+
+Entregas a serem feitas: 
+
+Diagrama do modelo entidade-relacionamento - projeto conceitual do banco de dados 
+Diagrama UML de classes apresentando somente os métodos e relacionamentos 
+Criação do projeto no Adianti builder versão gratuita no Adianti Builder para uma arquitetura de uma aplicação para muitos banco de dados
+Implementação física do banco de dados no Builder e no MySQL  
+3 telas de cadastro a escolha 
+3 telas de rotinas do usuário a escolha 
+Tela de gerenciamento de turmas e de faltas propostas. 
+
+Premissas: 
+
+As partes interessadas, regras de negócio, organização e comportamentos do sistema são de livre escolha. 
+A solução a ser implementada deve apresentar no mínimo 2 diferenciais sobre o seu funcionamento e entregas para os interessados definidos. 
+A ferramenta para realização dos diagramas é de livre escolha 
+O framework para desenvolvimento é o Adianti Builder 
+Banco de dados - MYSQL 
+A modelagem de banco deve contemplar até 10 tabelas conforme é o limite da versão gratuíta da ferramenta. 
+
+Datas das entregas: 
+
+Projeto conceitual - banco e classes
+Até a próxima segunda-feira - 19/09
+Implementação física do projeto para desenvolvimento no Builder, banco de dados - até a próxima sexta-feira dia 23
+Conclusão do desenvolvimento para testes - até a quarta-feira dia 28/09
