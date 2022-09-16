@@ -1,0 +1,98 @@
+Preenchimentos necessários:
+1. Cadastro de Instituições
+2. Cadastro de Cursos
+3. Cadastro de Disciplinas
+4. Cadastro de Professores
+5. Cadastro de Alunos
+6. Cadastro de Turmas
+7. Cadastro de Faltas
+
+
+8. Consulta de Faltas
+
+Começo(visão):
+- Sem tela de login/Solicitações em "sequência"
+
+- Realizar o cadastro da Instituição
+	- Nome;
+	- Endereço;
+
+- Realizar o cadastros dos cursos das instituições existentes
+ 	- Selecionar a instituição;
+	- Nome do Curso;
+	
+- Realizar o cadastro das disciplinas dos cursos existentes
+	- Nome da disciplina;
+	- Nº Máximo de faltas permitidas;
+	 
+- Realizar o cadastro da Turma
+	- ID/Nome da Turma;	
+	
+- Realizar o cadastro do professor
+	- ID;
+	- Nome;
+	- Endereço;
+	- Idade;
+	- Genero;
+	- Graduação;
+	- Escolher Curso;
+	- Escolher a Disciplina;
+	- Escolher a Turma;
+		
+- Realizar o cadastro do Aluno
+	- ID/MATRICULA;
+	- Nome;
+	- Endereço;
+	- Idade;
+	- Genero;
+	- Escolher Curso;
+	- Escolher Disciplina;
+	- Escolher a Turma;
+	- Selecionar o Aluno;
+	
+- Cadastro de Faltas (pelo professor)
+	- Seleciona o professor;
+	- Seleciona a turma;
+	- Seleciona o aluno;
+	- Marcação de falta;
+
+- Consulta de Faltas (pelo professor ou aluno)
+	- Seleciona o curso;
+	- Seleciona a disciplina;
+	- Seleciona a turma;
+	- Seleciona o aluno;
+
+
+ENTIDADES/CLASSES:
+
+Nome: Instituição 
+Atributos: Nome, Endereço
+Métodos: Adiciona Instituição
+
+Nome: Cursos
+Atributos: Nome, Instituição
+Métodos: Adiciona Curso
+
+Nome: Disciplinas
+Atributos: Nome, Nº Max de faltas, Curso
+Métodos: Adiciona Disciplina
+
+Nome: Turmas
+Atributos: ID, Disciplina, Curso
+Métodos: Adiciona turma
+
+Nome: Pessoa
+atributos: Nome, endereço, idade, genero, Professor, Aluno
+Métodos: Adiciona pessoa
+
+Nome: Professor
+atributos: ID, graduação, Pessoa, Curso, Disciplina,
+Métodos: Adiciona professor
+
+Nome: Aluno
+atributos: ID, Pessoa, Curso, Disciplina, Turma
+Métodos: Adiciona aluno
+
+Nome: Faltas
+atributos: marcação de falta, Professor, Aluno, Curso, Disciplina, Turma
+métodos: Adicionar faltas, Consultar Faltas
