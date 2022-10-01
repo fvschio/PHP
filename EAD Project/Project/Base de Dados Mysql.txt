@@ -1,0 +1,317 @@
+CREATE TABLE alunos( 
+      `matricula`  INT  AUTO_INCREMENT    NOT NULL  , 
+      `nome` varchar  (100)   , 
+      `cpf` int   , 
+      `genero` char   , 
+      `graduacao` int   , 
+      `Idade` int   , 
+      `telefone` int   , 
+      `cep` int   , 
+      `logradouro` varchar  (50)   , 
+      `numero` int   , 
+      `bairro` varchar  (50)   , 
+      `cidade` varchar  (50)   , 
+      `estado` varchar  (2)   , 
+ PRIMARY KEY (matricula)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; 
+
+CREATE TABLE alunoxturmas( 
+      `id`  INT  AUTO_INCREMENT    NOT NULL  , 
+      `idturmas` int   , 
+      `idmatricula` int   , 
+ PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; 
+
+CREATE TABLE cursos( 
+      `id`  INT  AUTO_INCREMENT    NOT NULL  , 
+      `nome` varchar  (50)   , 
+ PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; 
+
+CREATE TABLE cursoxdisciplina( 
+      `id`  INT  AUTO_INCREMENT    NOT NULL  , 
+      `idcursos` int   , 
+      `iddisciplinas` int   , 
+ PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; 
+
+CREATE TABLE disciplinas( 
+      `id`  INT  AUTO_INCREMENT    NOT NULL  , 
+      `nome` varchar  (50)   , 
+      `faltaspermitidas` int   , 
+      `numeroaulas` int   , 
+ PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; 
+
+CREATE TABLE graduacao( 
+      `id`  INT  AUTO_INCREMENT    NOT NULL  , 
+      `nome` varchar  (50)   , 
+ PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; 
+
+CREATE TABLE instituicoes( 
+      `id`  INT  AUTO_INCREMENT    NOT NULL  , 
+      `razaosocial` varchar  (50)   , 
+      `cep` int   , 
+      `logradouro` varchar  (50)   , 
+      `numero` int   , 
+      `bairro` varchar  (50)   , 
+      `cidade` varchar  (50)   , 
+      `estado` varchar  (2)   , 
+ PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; 
+
+CREATE TABLE professores( 
+      `id`  INT  AUTO_INCREMENT    NOT NULL  , 
+      `nome` varchar  (50)   , 
+      `cpf` int   , 
+      `genero` char   , 
+      `graduacao` int   , 
+      `idade` int   , 
+      `telefone` int   , 
+      `cep` int   , 
+      `logradouro` varchar  (50)   , 
+      `numero` int   , 
+      `bairro` varchar  (50)   , 
+      `cidade` varchar  (50)   , 
+      `estado` varchar  (2)   , 
+ PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; 
+
+CREATE TABLE registropresenca( 
+      `id`  INT  AUTO_INCREMENT    NOT NULL  , 
+      `datapresenca` int   , 
+      `presenca` boolean   , 
+      `idalunosturma` int   , 
+ PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; 
+
+CREATE TABLE turmas( 
+      `id`  INT  AUTO_INCREMENT    NOT NULL  , 
+      `nome` varchar  (50)   , 
+      `idinstituicao` int   , 
+      `idcursodisciplina` int   , 
+      `idprofessores` int   , 
+      `idalunosxturmas` int   , 
+ PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; 
+
+ 
+  
+ ALTER TABLE alunos ADD CONSTRAINT fk_graduacao FOREIGN KEY (graduacao) references graduacao(id); 
+ALTER TABLE alunoxturmas ADD CONSTRAINT fk_idmatricula FOREIGN KEY (idmatricula) references alunos(matricula); 
+ALTER TABLE alunoxturmas ADD CONSTRAINT fk_idturmas FOREIGN KEY (idturmas) references turmas(id); 
+ALTER TABLE cursoxdisciplina ADD CONSTRAINT fk_idcursos FOREIGN KEY (idcursos) references cursos(id); 
+ALTER TABLE cursoxdisciplina ADD CONSTRAINT fk_iddisciplinas FOREIGN KEY (iddisciplinas) references disciplinas(id); 
+ALTER TABLE professores ADD CONSTRAINT fk_graduacao FOREIGN KEY (graduacao) references graduacao(id); 
+ALTER TABLE registropresenca ADD CONSTRAINT fk_idalunosturma FOREIGN KEY (idalunosturma) references alunoxturmas(id); 
+ALTER TABLE turmas ADD CONSTRAINT fk_idinstituicao FOREIGN KEY (idinstituicao) references instituicoes(id); 
+ALTER TABLE turmas ADD CONSTRAINT fk_idprofessores FOREIGN KEY (idprofessores) references professores(id); 
+ALTER TABLE turmas ADD CONSTRAINT fk_idcursodisciplina FOREIGN KEY (idcursodisciplina) references cursoxdisciplina(id); 
+
+  
+INSERT INTO alunos (matricula,nome,cpf,genero,graduacao,Idade,telefone,cep,logradouro,numero,bairro,cidade,estado) VALUES (1,'Felipe Velho Schio',01929293054,'M',3,19121990,54999364323,95020172,'Rua Pinheiro Machado',2791,'São Pelegrino','Caxias do Sul','RS'); 
+
+INSERT INTO alunos (matricula,nome,cpf,genero,graduacao,Idade,telefone,cep,logradouro,numero,bairro,cidade,estado) VALUES (2,'Joana Michelin',29982745875,'F',1,20051989,54993465323,92010173,'Rua Dom José Baréa',1314,'Floresta','Caxias do Sul','RS'); 
+
+INSERT INTO alunos (matricula,nome,cpf,genero,graduacao,Idade,telefone,cep,logradouro,numero,bairro,cidade,estado) VALUES (3,'Marcos Godoy da Silva',36907694859,'M',2,25121975,51989344324,95030122,'Avenida Borges de Medeiros',131,'Júlio de Castilhos','Farroupilha','RS'); 
+
+INSERT INTO alunos (matricula,nome,cpf,genero,graduacao,Idade,telefone,cep,logradouro,numero,bairro,cidade,estado) VALUES (4,'Janaínee Assunção ',04250054616,'F',4,12111988,54999664422,95070192,'Rua Marquês do Herval',1174,'Centro','Caxias do Sul','RS'); 
+
+INSERT INTO alunos (matricula,nome,cpf,genero,graduacao,Idade,telefone,cep,logradouro,numero,bairro,cidade,estado) VALUES (5,'Marcelino das Neves de Medeiros',32403297860,'M',1,14071993,51999554343,96030112,'Avenida Alfredo Chaves',390,'Guaporã','Porto Alegre','RS'); 
+
+INSERT INTO alunoxturmas (id,idturmas,idmatricula) VALUES (1,1,1); 
+
+INSERT INTO alunoxturmas (id,idturmas,idmatricula) VALUES (2,2,2); 
+
+INSERT INTO alunoxturmas (id,idturmas,idmatricula) VALUES (3,10,3); 
+
+INSERT INTO alunoxturmas (id,idturmas,idmatricula) VALUES (4,14,4); 
+
+INSERT INTO alunoxturmas (id,idturmas,idmatricula) VALUES (5,20,5); 
+
+INSERT INTO alunoxturmas (id,idturmas,idmatricula) VALUES (6,6,1); 
+
+INSERT INTO alunoxturmas (id,idturmas,idmatricula) VALUES (7,8,1); 
+
+INSERT INTO alunoxturmas (id,idturmas,idmatricula) VALUES (8,9,2); 
+
+INSERT INTO alunoxturmas (id,idturmas,idmatricula) VALUES (9,19,4); 
+
+INSERT INTO alunoxturmas (id,idturmas,idmatricula) VALUES (10,14,5); 
+
+INSERT INTO cursos (id,nome) VALUES (1,'Engenharia da Computação'); 
+
+INSERT INTO cursos (id,nome) VALUES (2,'Ciência da Computação'); 
+
+INSERT INTO cursos (id,nome) VALUES (3,'Análise de Sistemas'); 
+
+INSERT INTO cursos (id,nome) VALUES (4,'Sistemas para Internet'); 
+
+INSERT INTO cursos (id,nome) VALUES (5,'Redes de Computadores'); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (1,1,1); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (2,1,2); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (3,1,3); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (4,1,4); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (5,1,5); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (6,2,6); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (7,2,7); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (8,2,8); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (9,2,9); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (10,3,10); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (11,3,11); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (12,4,12); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (13,4,13); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (14,5,3); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (15,5,4); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (16,5,5); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (17,5,1); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (18,5,28); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (19,1,18); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (20,1,19); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (21,2,20); 
+
+INSERT INTO cursoxdisciplina (id,idcursos,iddisciplinas) VALUES (22,2,21); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (1,'Administração',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (2,'Empreendedorismo',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (3,'Redes I',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (4,'Redes II',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (5,'Redes III',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (6,'Tópicos de Programação I',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (7,'Tópicos de Programação II',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (8,'Tópicos de Programação III',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (9,'Tópicos de Programação IV',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (10,'Sistemas Operacionais I',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (11,'Sistemas Operacionais II',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (12,'Algoritmos I',7,20); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (13,'Algoritmos II',7,20); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (14,'Estatística',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (15,'Lógica Computacional',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (16,'Computador e Sociedade',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (17,'Inglês Técnico',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (18,'Banco da Dados I',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (19,'Banco de Dados II',7,20); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (20,'Engenharia de Software I',7,20); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (21,'Engenharia de Software II',7,20); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (22,'Matemática I',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (23,'Matemática II',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (24,'Matemática III',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (25,'Matemática IV',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (26,'Grafos',7,20); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (27,'Inteligência Artificial',7,20); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (28,'Comunicação',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (29,'Arquitetura de Computadores I',5,15); 
+
+INSERT INTO disciplinas (id,nome,faltaspermitidas,numeroaulas) VALUES (30,'Arquitetura de Computadores II',5,15); 
+
+INSERT INTO graduacao (id,nome) VALUES (1,'Médio Completo'); 
+
+INSERT INTO graduacao (id,nome) VALUES (2,'Superior Incompleto'); 
+
+INSERT INTO graduacao (id,nome) VALUES (3,'Superior Completo'); 
+
+INSERT INTO graduacao (id,nome) VALUES (4,'Pós-Graduação'); 
+
+INSERT INTO graduacao (id,nome) VALUES (5,'Mestrado'); 
+
+INSERT INTO graduacao (id,nome) VALUES (6,'Doutorado'); 
+
+INSERT INTO instituicoes (id,razaosocial,cep,logradouro,numero,bairro,cidade,estado) VALUES (1,'Instituição de Tecnologia Serra-Guanabara',95032193,'Rua Marginal dos Afogados',2388,'São Caetano','Porto Alegre','RS'); 
+
+INSERT INTO instituicoes (id,razaosocial,cep,logradouro,numero,bairro,cidade,estado) VALUES (2,'Universidade de Tecnologia Juca Pirama',95017223,'Rua Metrópolis XX',123,'São Mateus','Porto Alegre','RS'); 
+
+INSERT INTO professores (id,nome,cpf,genero,graduacao,idade,telefone,cep,logradouro,numero,bairro,cidade,estado) VALUES (1,'Jorge Lucas',32148818848,'M',6,13051970,51999365437,95192892,'Rua das Flores',9,'Estrela Vermelha','Passo do Inferno','RS'); 
+
+INSERT INTO professores (id,nome,cpf,genero,graduacao,idade,telefone,cep,logradouro,numero,bairro,cidade,estado) VALUES (2,'Mickey Junior',29417103881,'M',5,14031968,51995493092,95082190,'Avenida Disney',1900,'Monte Castelo','Nova Orleans','PR'); 
+
+INSERT INTO professores (id,nome,cpf,genero,graduacao,idade,telefone,cep,logradouro,numero,bairro,cidade,estado) VALUES (3,'Adriana Scooby-doo',32798943876,'F',4,33287017888,51999743839,95030189,'Travessa da Combi',1329,'Warner dos Brothers','Bollywood','PR'); 
+
+INSERT INTO professores (id,nome,cpf,genero,graduacao,idade,telefone,cep,logradouro,numero,bairro,cidade,estado) VALUES (4,'Fernandes Tévez',29597332825 ,'M',5,20101983,51999738456,95092659,'Avenida Argentina',2048,'Mano de Dios','Acapulco','SC'); 
+
+INSERT INTO professores (id,nome,cpf,genero,graduacao,idade,telefone,cep,logradouro,numero,bairro,cidade,estado) VALUES (5,'Maria Aladdin de Albuquerque',34683415801,'F',5,01021986,54999154968,9507281,'Caminho das Índias',01,'Palácio Bagdá','New Roma Egypt','SP'); 
+
+INSERT INTO registropresenca (id,datapresenca,presenca,idalunosturma) VALUES (1,10112022,true,1); 
+
+INSERT INTO registropresenca (id,datapresenca,presenca,idalunosturma) VALUES (2,20112022,false,2); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (1,'0001',1,1,1,1); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (2,'0002',1,2,2,2); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (3,'0003',1,3,3,2); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (4,'0004',1,4,4,3); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (5,'0005',1,5,5,3); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (6,'0006',2,7,1,4); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (7,'0007',1,8,1,4); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (8,'0008',1,9,1,5); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (9,'0009',1,10,1,5); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (10,'X01',2,11,2,6); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (11,'X02',2,12,2,6); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (12,'X03',2,13,2,7); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (13,'X04',2,14,2,7); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (14,'X05',2,15,3,8); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (15,'X06',2,16,3,9); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (16,'X07',2,17,4,9); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (17,'X08',2,18,4,10); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (18,'X09',2,19,5,1); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (19,'X10',2,20,5,2); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (20,'X11',2,21,5,3); 
+
+INSERT INTO turmas (id,nome,idinstituicao,idcursodisciplina,idprofessores,idalunosxturmas) VALUES (21,'0010',1,22,1,4); 
